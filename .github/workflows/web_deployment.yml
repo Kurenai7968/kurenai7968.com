@@ -21,7 +21,7 @@ jobs:
           cd build/web
           git init
           git config --global user.email kurenai7968.dev@gmail.com
-          git config --global user.name Kurenai7968
+          git config --global user.name vincentlam
           git status
           git remote add origin https://${{secrets.commit_secret}}@github.com/Kurenai7968/portfolio.git
           git checkout -b gh-pages
