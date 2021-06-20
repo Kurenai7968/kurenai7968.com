@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:portfolio/bloc/localization_bloc.dart';
 import 'package:portfolio/services/localization.dart';
+import 'package:portfolio/services/screen_size.dart';
+import 'package:portfolio/ui/components/scroll_behavior_modified.dart';
 import 'package:portfolio/ui/portfolio_screen.dart';
 
 void main() {
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Kurenai\'s portfolio',
+          title: 'Home',
           locale: state.locale,
           localizationsDelegates: [
             AppLocalizationsDelegate(),
@@ -48,7 +50,15 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: PortfolioScreen(),
+          builder: (context, widget) {
+            return ScrollConfiguration(
+              behavior: ScrollBehaviorModified(),
+              child: widget!,
+            );
+          },
+          home: ScreenSizeInit(
+            child: PortfolioScreen(),
+          ),
         );
       },
     );
