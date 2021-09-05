@@ -35,7 +35,7 @@ dev_dependencies:
   excel: ^2.0.0-null-safety-3
   translation2json:
     git:
-      url: git@github.com:Kurenai7968/translation2json.git
+      url: https://github.com/Kurenai7968/translation2json.git
   args:
 
 # For information on the generic Dart part of this file, see the

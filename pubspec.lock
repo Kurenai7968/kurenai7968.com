@@ -242,7 +242,7 @@ packages:
       path: "."
       ref: HEAD
       resolved-ref: f0784ec64e8e36906e9f8079a4ac990a5ce5bc62
-      url: "git@github.com:Kurenai7968/translation2json.git"
+      url: "https://github.com/Kurenai7968/translation2json.git"
     source: git
     version: "0.0.1"
   typed_data:
