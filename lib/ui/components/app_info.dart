@@ -17,7 +17,8 @@ class _AppInfoState extends State<AppInfo> {
       builder: (BuildContext context, BoxConstraints constraints) {
         return Container(
           padding: EdgeInsets.symmetric(vertical: 40),
-          color: widget.model.color,
+          margin: EdgeInsets.all(5),
+          color: !widget.model.isBlackStyle ? Colors.black : Colors.grey[200],
           child: Column(
             children: [
               Expanded(
@@ -45,36 +46,47 @@ class _AppInfoState extends State<AppInfo> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(height: 10),
-                        GestureDetector(
-                          onTap: () async => widget.model.appStoreUrl != null
-                              ? await launch(widget.model.appStoreUrl!)
-                              : null,
-                          child: Container(
-                            child: Image.asset(
-                              widget.model.isBlackStyle
-                                  ? 'assets/images/app_store_black.png'
-                                  : 'assets/images/app_store_white.png',
-                              color: widget.model.appStoreUrl == null
-                                  ? Color(0xE0B3AFAF)
-                                  : null,
-                              colorBlendMode: BlendMode.modulate,
+                        MouseRegion(
+                          cursor: widget.model.appStoreUrl != null
+                              ? SystemMouseCursors.click
+                              : MouseCursor.defer,
+                          child: GestureDetector(
+                            onTap: () async => widget.model.appStoreUrl != null
+                                ? await launch(widget.model.appStoreUrl!)
+                                : null,
+                            child: Container(
+                              child: Image.asset(
+                                widget.model.isBlackStyle
+                                    ? 'assets/images/app_store_black.png'
+                                    : 'assets/images/app_store_white.png',
+                                color: widget.model.appStoreUrl == null
+                                    ? Color(0xE0B3AFAF)
+                                    : null,
+                                colorBlendMode: BlendMode.modulate,
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(width: 20),
-                        GestureDetector(
-                          onTap: () async => widget.model.googlePlayUrl != null
-                              ? await launch(widget.model.googlePlayUrl!)
-                              : null,
-                          child: Container(
-                            child: Image.asset(
-                              widget.model.isBlackStyle
-                                  ? 'assets/images/google_play_black.png'
-                                  : 'assets/images/google_play_white.png',
-                              color: widget.model.googlePlayUrl == null
-                                  ? Color(0xE0B3AFAF)
-                                  : null,
-                              colorBlendMode: BlendMode.modulate,
+                        MouseRegion(
+                          cursor: widget.model.googlePlayUrl != null
+                              ? SystemMouseCursors.click
+                              : MouseCursor.defer,
+                          child: GestureDetector(
+                            onTap: () async =>
+                                widget.model.googlePlayUrl != null
+                                    ? await launch(widget.model.googlePlayUrl!)
+                                    : null,
+                            child: Container(
+                              child: Image.asset(
+                                widget.model.isBlackStyle
+                                    ? 'assets/images/google_play_black.png'
+                                    : 'assets/images/google_play_white.png',
+                                color: widget.model.googlePlayUrl == null
+                                    ? Color(0xE0B3AFAF)
+                                    : null,
+                                colorBlendMode: BlendMode.modulate,
+                              ),
                             ),
                           ),
                         ),

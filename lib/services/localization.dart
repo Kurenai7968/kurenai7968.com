@@ -1,7 +1,22 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+
+extension TranslationHelperStateless on StatelessWidget {
+  String tr(BuildContext context, String key) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!
+        .lang[key]!;
+  }
+}
+
+extension TranslationHelperStateful<T extends StatefulWidget> on State<T> {
+  String tr(BuildContext context, String key) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!
+        .lang[key]!;
+  }
+}
 
 class AppLocalizations {
   late final Locale locale;
@@ -13,14 +28,10 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  String get langCode =>
-      '${locale.languageCode.toLowerCase()}_${locale.countryCode!.toLowerCase()}';
-
   Future<void> load() async {
-    String _lang =
-        '${locale.languageCode.toLowerCase()}_${locale.countryCode!.toLowerCase()}';
-    print('Current Language: $_lang');
-    String jsonString = await _localAssetFile('assets/languages/$_lang.json');
+    log('Current Language: $langCode');
+    String jsonString =
+        await _localAssetFile('assets/languages/$langCode.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     _localizedValues =
         jsonMap.map((key, value) => MapEntry(key, value.toString()));
@@ -29,6 +40,9 @@ class AppLocalizations {
   Future<String> _localAssetFile(String assetPath) async {
     return await rootBundle.loadString(assetPath);
   }
+
+  String get langCode =>
+      '${locale.languageCode.toLowerCase()}_${locale.countryCode!.toLowerCase()}';
 
   Map<String, String> get lang => _localizedValues;
 }

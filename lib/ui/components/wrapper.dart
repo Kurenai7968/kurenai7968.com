@@ -18,16 +18,8 @@ class _WrapperState extends State<Wrapper> {
       child: Stack(
         children: [
           Positioned.fill(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    height: ScreenSize.appBarHeight,
-                  ),
-                  widget.child,
-                ],
-              ),
-            ),
+            top: ScreenSize.appBarHeight,
+            child: widget.child,
           ),
           Container(
             height: ScreenSize.appBarHeight,

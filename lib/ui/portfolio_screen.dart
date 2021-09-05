@@ -10,32 +10,54 @@ class PortfolioScreen extends StatefulWidget {
 }
 
 class _PortfolioScreenState extends State<PortfolioScreen> {
+  double _productHeight = 400;
   List<ProductModel> _products = [];
 
   List<Widget> productsWidget(double width, List<ProductModel> products) {
-    return products.map((model) {
-      // if width > 700 return web size, else return mobile size
-      if (width > 700)
-        return Container(
-          width: width / 2,
-          height: 350,
-          child: AppInfo(model),
-        );
-      else
-        return Container(
-          width: width,
-          height: 350,
-          child: AppInfo(model),
-        );
-    }).toList();
+    List<bool> styles = [true, false, false, true];
+
+    return products
+        .asMap()
+        .map((index, model) {
+          // if width < 700 return mobile size, else return web size
+          if (width < 700)
+            return MapEntry(
+              index,
+              Container(
+                width: width,
+                height: _productHeight,
+                child: AppInfo(
+                  model..isBlackStyle = index % 2 == 0,
+                ),
+              ),
+            );
+          else
+            return MapEntry(
+              index,
+              Container(
+                width: width / 2,
+                height: _productHeight,
+                child: AppInfo(
+                  model..isBlackStyle = styles[index % 4],
+                ),
+              ),
+            );
+        })
+        .values
+        .toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    Map<String, String> lang = AppLocalizations.of(context).lang;
     _products = [
       ProductModel(
-        lang['unit_converter']!,
+        tr(context, 'insta_repost'),
+        imagePath: 'assets/images/insta_repost.png',
+        googlePlayUrl:
+            'https://play.google.com/store/apps/details?id=com.kurenai7968.insta_repost',
+      ),
+      ProductModel(
+        tr(context, 'unit_converter'),
         imagePath: 'assets/images/unit_converter.jpg',
         appStoreUrl:
             'https://apps.apple.com/app/converter-common-units-convert/id1570015168',
@@ -43,26 +65,25 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
             'https://play.google.com/store/apps/details?id=com.kurenai7968.unit_converter',
       ),
       ProductModel(
-        lang['qr_code_reader']!,
+        tr(context, 'qr_code_reader'),
         imagePath: 'assets/images/qr_code_reader.jpg',
         appStoreUrl:
             'https://apps.apple.com/app/qr-scanner-custom-generator/id1559222251',
         googlePlayUrl:
             'https://play.google.com/store/apps/details?id=com.kurenai7968.qr_code_reader',
-        color: Colors.black,
-        isBlackStyle: false,
       ),
     ];
+
     return Scaffold(
       body: Wrapper(
-        child: SingleChildScrollView(
-          child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              return Wrap(
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return SingleChildScrollView(
+              child: Wrap(
                 children: productsWidget(constraints.maxWidth, _products),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
