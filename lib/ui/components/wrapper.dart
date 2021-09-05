@@ -13,24 +13,34 @@ class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenSize().height,
+      height: ScreenSize.height(context),
       width: double.infinity,
       child: Stack(
         children: [
           Positioned.fill(
             child: SingleChildScrollView(
-              child: Column(children: [
-                Container(
-                  height: ScreenSize().appBarHeight,
-                ),
-                widget.child,
-              ]),
+              child: Column(
+                children: [
+                  Container(
+                    height: ScreenSize.appBarHeight,
+                  ),
+                  widget.child,
+                ],
+              ),
             ),
           ),
           Container(
-            height: ScreenSize().appBarHeight,
-            width: double.infinity,
+            height: ScreenSize.appBarHeight,
+            width: ScreenSize.width(context),
             child: CustomAppBar(),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              height: ScreenSize.footerHeight,
+              width: MediaQuery.of(context).size.width,
+              child: Footer(),
+            ),
           ),
         ],
       ),
@@ -44,20 +54,58 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
       color: Color(0xEE000000),
-      child: Row(
+      child: Column(
         children: [
-          GestureDetector(
-            // onTap: () => html.window.open(html.window.location.href, '_blank'),
-            child: Icon(
-              Icons.home,
-              color: Colors.white,
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    child: Icon(
+                      Icons.home,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Expanded(child: Container()),
+                ],
+              ),
             ),
           ),
-          Expanded(child: Container()),
+          Container(
+            height: 1,
+            color: Colors.grey[700],
+          ),
         ],
       ),
+    );
+  }
+}
+
+class Footer extends StatelessWidget {
+  const Footer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          height: 1,
+          color: Colors.grey[700],
+        ),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.only(right: 20),
+            color: Colors.black,
+            alignment: Alignment.centerRight,
+            child: Text(
+              '@2021 Vincent Lam',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

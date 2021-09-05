@@ -1,18 +1,12 @@
 part of 'localization_bloc.dart';
 
 @immutable
-abstract class LocalizationState extends Equatable {
+abstract class LocalizationState {
   final Locale? locale;
 
   LocalizationState(this.locale);
-  @override
-  List<Object?> get props => [locale];
 }
 
-class LocalizationInitial extends LocalizationState {
-  LocalizationInitial(Locale? locale) : super(locale);
-}
-
-class LocalizationLoading extends LocalizationState {
-  LocalizationLoading(Locale? locale) : super(locale);
+class LocaleUpdated extends LocalizationState {
+  LocaleUpdated(Locale? locale) : super(locale);
 }

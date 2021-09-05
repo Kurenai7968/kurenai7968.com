@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:portfolio/bloc/localization_bloc.dart';
 import 'package:portfolio/services/localization.dart';
-import 'package:portfolio/services/screen_size.dart';
 import 'package:portfolio/ui/components/scroll_behavior_modified.dart';
 import 'package:portfolio/ui/portfolio_screen.dart';
 
@@ -56,9 +55,7 @@ class MyApp extends StatelessWidget {
               child: widget!,
             );
           },
-          home: ScreenSizeInit(
-            child: PortfolioScreen(),
-          ),
+          home: PortfolioScreen(),
         );
       },
     );
