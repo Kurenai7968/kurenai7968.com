@@ -59,18 +59,23 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       ProductModel(
         tr(context, 'unit_converter'),
         imagePath: 'assets/images/unit_converter.jpg',
-        appStoreUrl:
-            'https://apps.apple.com/app/converter-common-units-convert/id1570015168',
+        appStoreUrl: 'https://apps.apple.com/app/id1570015168',
         googlePlayUrl:
             'https://play.google.com/store/apps/details?id=com.kurenai7968.unit_converter',
       ),
       ProductModel(
         tr(context, 'qr_code_reader'),
         imagePath: 'assets/images/qr_code_reader.jpg',
-        appStoreUrl:
-            'https://apps.apple.com/app/qr-scanner-custom-generator/id1559222251',
+        appStoreUrl: 'https://apps.apple.com/app/id1559222251',
         googlePlayUrl:
             'https://play.google.com/store/apps/details?id=com.kurenai7968.qr_code_reader',
+      ),
+      ProductModel(
+        'Resume Builder: Smart CV Maker',
+        imagePath: 'assets/images/resume_builder.jpg',
+        appStoreUrl: 'https://apps.apple.com/app/id1629296933',
+        googlePlayUrl:
+            'https://play.google.com/store/apps/details?id=com.kurenai7968.resume_builder',
       ),
     ];
 
