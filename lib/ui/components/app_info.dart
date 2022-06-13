@@ -52,7 +52,8 @@ class _AppInfoState extends State<AppInfo> {
                               : MouseCursor.defer,
                           child: GestureDetector(
                             onTap: () async => widget.model.appStoreUrl != null
-                                ? await launch(widget.model.appStoreUrl!)
+                                ? await launchUrl(
+                                    Uri.parse(widget.model.appStoreUrl!))
                                 : null,
                             child: Container(
                               child: Image.asset(
