@@ -7,12 +7,11 @@ import 'package:portfolio/services/localization.dart';
 import 'package:portfolio/ui/components/scroll_behavior_modified.dart';
 import 'package:portfolio/ui/portfolio_screen.dart';
 
-import 'app/app.dart';
-
 void main() {
   GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
 
-  runApp(const App());
+  // runApp(const App());
+  runApp(const BlocManagement());
 }
 
 class BlocManagement extends StatelessWidget {
