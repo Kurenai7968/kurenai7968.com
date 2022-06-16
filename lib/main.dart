@@ -1,67 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:portfolio/bloc/localization_bloc.dart';
-import 'package:portfolio/services/localization.dart';
-import 'package:portfolio/ui/components/scroll_behavior_modified.dart';
-import 'package:portfolio/ui/portfolio_screen.dart';
+
+import 'app/app.dart';
 
 void main() {
   GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
 
-  // runApp(const App());
-  runApp(const BlocManagement());
-}
-
-class BlocManagement extends StatelessWidget {
-  const BlocManagement({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => LocalizationBloc()),
-      ],
-      child: MyApp(),
-    );
-  }
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LocalizationBloc, LocalizationState>(
-      builder: (context, state) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Home',
-          locale: state.locale,
-          localizationsDelegates: [
-            AppLocalizationsDelegate(),
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: [
-            Locale('en', 'US'),
-            Locale.fromSubtags(
-                languageCode: 'zh', scriptCode: 'Hant', countryCode: 'TW'),
-            Locale.fromSubtags(
-                languageCode: 'zh', scriptCode: 'Hans', countryCode: 'CN'),
-          ],
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          builder: (context, widget) {
-            return ScrollConfiguration(
-              behavior: ScrollBehaviorModified(),
-              child: widget!,
-            );
-          },
-          home: PortfolioScreen(),
-        );
-      },
-    );
-  }
+  runApp(const App());
 }
